@@ -1,26 +1,24 @@
 import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import { connect } from 'react-redux';
+import HeaderComponent from './components/header.component';
+import { bindActionCreators, Dispatch } from 'redux';
+import * as quizActions from './store/quiz/actions';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+class App extends React.Component<any> {
+  componentDidMount() {
+    const  { loadInitialState } = this.props;
+    loadInitialState();
+  }
+  render() {
+    return (
+      <div>
+        <h1>Alow</h1>
+        <HeaderComponent></HeaderComponent>
+      </div>
+    );
+  }
 }
 
-export default App;
+const mapDispatchToProps = (dispatch: Dispatch) => bindActionCreators(quizActions, dispatch);
+
+export default connect(null, mapDispatchToProps)(App);
