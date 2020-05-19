@@ -1,8 +1,12 @@
 import React from 'react';
+import Container from '@material-ui/core/Container';
 import { connect } from 'react-redux';
-import HeaderComponent from './components/header.component';
+import './App.css'
+import QuizHeader from './components/quiz-header/quiz-header.component';
 import { bindActionCreators, Dispatch } from 'redux';
 import * as quizActions from './store/quiz/actions';
+import QuizBody from './components/quiz-body/quiz-body.component';
+import QuizFooter from './components/quiz-footer/quiz-footer.component';
 
 class App extends React.Component<any> {
   componentDidMount() {
@@ -11,10 +15,11 @@ class App extends React.Component<any> {
   }
   render() {
     return (
-      <div>
-        <h1>Alow</h1>
-        <HeaderComponent></HeaderComponent>
-      </div>
+      <Container maxWidth="md" className="app-container">    
+        <QuizHeader />
+        <QuizBody />
+        <QuizFooter />
+      </Container>
     );
   }
 }

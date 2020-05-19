@@ -1,0 +1,33 @@
+main {
+    flex: 1 0 auto; /*Is a flex item*/
+    display: flex; /*I just included this! - now a
+    flex container with flex items: sidebar & main content
+    section*/
+}
+
+aside {
+    flex: 0 0 150px; /*do not grow or shrink. Stay fixed
+    at 40px*/
+}
+
+.content {
+    display: flex;
+    flex: 1 1 auto; /*this makes sure the section grows to fill the entire available
+    space and shrinks too*/
+    flex-direction: column;
+    }
+
+.quiz-body-container {
+    display: flex;
+    min-height: 700px;
+}
+
+.navbar-aside {
+    width: 200px;
+}
+
+.question-content {
+    width: fit-content;
+    margin: 0 20px 0 20px;
+    text-align: center;
+}
