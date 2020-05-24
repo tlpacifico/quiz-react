@@ -37,12 +37,10 @@ class QuizApp extends Component<Props>{
     
     render() {
         const { currentQuestion, questions, totalOfQuestions } = this.props;
-    
-        console.log(totalOfQuestions);
 
         return (
           <Container maxWidth="md" className="app-container">    
-            <QuizHeader totalOfQuestion={totalOfQuestions} currentQuestion={currentQuestion.id} timerQuiz={40} />
+            <QuizHeader totalOfQuestion={totalOfQuestions} currentQuestion={currentQuestion.id} timerQuiz={30} />
             <QuizBody
                  key={currentQuestion.id}
                  question={ currentQuestion }

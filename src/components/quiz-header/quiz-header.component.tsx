@@ -9,24 +9,24 @@ interface OwnProps {
     timerQuiz: number;
 }
 
-class QuizHeader extends React.Component<OwnProps, { timerOut: string }>{
+class QuizHeader extends React.Component<OwnProps, { timerOut: string | null }>{
     constructor(props: OwnProps) {
         super(props);
         this.state = {
-            timerOut: ''
+            timerOut: ' '
         }
     }
 
     componentDidMount() {
 
         let startTime = moment(new Date());
-        const endTime = moment().add({ minutes: 40 });
+        const endTime = moment().add({ minutes: this.props.timerQuiz });
         setInterval(() => {
             startTime = moment(new Date());
             var duration = moment.duration(endTime.diff(startTime));
             var hours = Math.round(duration.asHours()) > 1 ? Math.round(duration.asHours()) : 0;
             var minutes = Math.round(duration.asMinutes()) - hours * 60;
-            const timetOut = minutes > 0 ? hours + "h " + minutes + "m " : '';
+            const timetOut = minutes > 0 ? hours + "h " + minutes + "m " : null;
             this.setState({ timerOut: timetOut });
         }, 1000);
     }
@@ -39,7 +39,7 @@ class QuizHeader extends React.Component<OwnProps, { timerOut: string }>{
                         <span>QUIZ XPTO</span>
                     </div>
                     <div className="counter-container">
-                        <span>Time limit: {this.state.timerOut}</span>
+        <span> {this.state.timerOut ? `Time limit: ${this.state.timerOut}` : 'Time is over!' }</span>
                     </div>
                 </div>
                 <div className="navigation-container">
