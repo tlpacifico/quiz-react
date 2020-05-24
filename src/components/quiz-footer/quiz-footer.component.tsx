@@ -9,16 +9,22 @@ type FooterProps = {
 }
 
 
-const QuizFooter: FunctionComponent<FooterProps> = ({loadQuestion, previousIdQuestion, nextIdQuestion}) => (
+const QuizFooter: FunctionComponent<FooterProps> = ({ loadQuestion, previousIdQuestion, nextIdQuestion }) => (
     <footer>
         <div className="navigation-container">
             <div className="navigation-item">
-                {previousIdQuestion}
-                <Button disabled={!previousIdQuestion} onClick={() => loadQuestion(previousIdQuestion ? previousIdQuestion : 0)}>Previous</Button>
+                <Button
+                    variant="contained"
+                    color="primary"
+                    disabled={!previousIdQuestion}
+                    onClick={() => loadQuestion(previousIdQuestion ? previousIdQuestion : 0)}>Previous</Button>
             </div>
             <div className="navigation-item text-right">
-                {nextIdQuestion}
-                <Button disabled={!nextIdQuestion} onClick={() => loadQuestion(nextIdQuestion ? nextIdQuestion : 0)}>Next</Button>
+                <Button
+                    variant="contained"
+                    color="primary"
+                    disabled={!nextIdQuestion}
+                    onClick={() => loadQuestion(nextIdQuestion ? nextIdQuestion : 0)}>Next</Button>
             </div>
         </div>
     </footer>

@@ -1,8 +1,7 @@
-import React, { FunctionComponent, MouseEvent, ChangeEvent } from 'react';
+import React, { FunctionComponent, ChangeEvent } from 'react';
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemText from '@material-ui/core/ListItemText';
-import Divider from '@material-ui/core/Divider';
 import './quiz-body.styles.scss';
 import { Question, SaverAnswerPayload } from '../../store/quiz/types';
 import { RadioGroup, FormControlLabel, Radio } from '@material-ui/core';
@@ -35,15 +34,15 @@ const QuizBody: FunctionComponent<QuestionProps> = ({ question, questions, loadQ
     return (
         <main>
             <aside>
-                <List component="nav" aria-label="secondary mailbox folders">
+                <List component="nav">
                     {questions.map(q =>
-                        <ListItem key={q.id}>
+                        <ListItemLink key={q.id}>
                             <ListItemText key={q.id} onClick={() => loadQuestion(q.id)} primary={`Question - ${q.id}`} />
-                        </ListItem>)}
+                        </ListItemLink>)}
                 </List>
             </aside>
             <section className="content">
-                <pre>
+                <pre className="question-description"> 
                     {question.description}
                 </pre>
                 <RadioGroup aria-label="quiz" name="quiz" value={answeredId} onChange={handleRadioChange}>

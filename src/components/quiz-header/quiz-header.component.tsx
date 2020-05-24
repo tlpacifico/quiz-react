@@ -1,6 +1,7 @@
 import React from 'react';
 import moment from 'moment';
 import './quiz-header.styles.scss'
+import { Box, LinearProgress } from '@material-ui/core';
 
 interface OwnProps {
     currentQuestion: number;
@@ -25,33 +26,28 @@ class QuizHeader extends React.Component<OwnProps, { timerOut: string }>{
             var duration = moment.duration(endTime.diff(startTime));
             var hours = Math.round(duration.asHours()) > 1 ? Math.round(duration.asHours()) : 0;
             var minutes = Math.round(duration.asMinutes()) - hours * 60;
-            const timetOut = hours + "h " + minutes + "m ";
+            const timetOut = minutes > 0 ? hours + "h " + minutes + "m " : '';
             this.setState({ timerOut: timetOut });
         }, 1000);
     }
     render() {
+        const completed = (this.props.currentQuestion*100)/this.props.totalOfQuestion;
         return (
-            <div className="header">
+            <Box  bgcolor="#f5f5f5" border="border-radius: 4px" marginBottom="20px" p={1}>
                 <div className="header-container">
                     <div className="title-container">
                         <span>QUIZ XPTO</span>
                     </div>
                     <div className="counter-container">
-                        <span>{this.state.timerOut}</span>
+                        <span>Time limit: {this.state.timerOut}</span>
                     </div>
                 </div>
                 <div className="navigation-container">
-                    <div className="navigation-item">
-                        {this.props.currentQuestion}
-                    </div>
-                    <div className="navigation-item text-center">
-                        De
-                 </div>
-                    <div className="navigation-item text-right">
-                        {this.props.totalOfQuestion}
+                    <div className="header-navigation-item">
+                        <LinearProgress variant="determinate" value={completed} />
                     </div>
                 </div>
-            </div>
+            </Box>
         )
     }
 }

@@ -17,6 +17,9 @@
     display: flex;
     width: 50%;
     align-items: flex-start;
+    font-size: 20px;
+    font-weight: bold;
+    color: #3f51b5;
 }
 
 .counter-container { 
@@ -24,24 +27,17 @@
     width: 50%;
     align-items: flex-end;
     flex-direction: column;
+    font-size: 17px;
+    font-weight: bold;
+    color: #3f51b5;
 }
 
-.navigation-container {
-    width: 100%;
+.navigation-container {  
     display: flex;
-    flex-direction: row;
-    align-items: flex-end;
+    flex-direction: row;   
     justify-content: space-between;
 }
 
-.navigation-item {
-    width: 40%;
-}
-
-.text-center {
-    text-align: center;
-}
-
-.text-right {
-    text-align: right;
+.header-navigation-item {
+    width: 100%;
 }
