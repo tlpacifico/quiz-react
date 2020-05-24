@@ -1,17 +1,25 @@
-import React from 'react';
+import React, { FunctionComponent } from 'react';
 import './quiz-footer.styles.scss';
 import { Button } from '@material-ui/core';
 
+type FooterProps = {
+    loadQuestion: (questionId: number) => void;
+    previousIdQuestion: number | null;
+    nextIdQuestion: number | null;
+}
 
-const QuizFooter = () => (
+
+const QuizFooter: FunctionComponent<FooterProps> = ({loadQuestion, previousIdQuestion, nextIdQuestion}) => (
     <footer>
-    <div className="navigation-container">
-             <div className="navigation-item">
-             <Button>Previous</Button>
-             </div>         
-             <div className="navigation-item text-right">
-             <Button>Next</Button>
-             </div>
+        <div className="navigation-container">
+            <div className="navigation-item">
+                {previousIdQuestion}
+                <Button disabled={!previousIdQuestion} onClick={() => loadQuestion(previousIdQuestion ? previousIdQuestion : 0)}>Previous</Button>
+            </div>
+            <div className="navigation-item text-right">
+                {nextIdQuestion}
+                <Button disabled={!nextIdQuestion} onClick={() => loadQuestion(nextIdQuestion ? nextIdQuestion : 0)}>Next</Button>
+            </div>
         </div>
     </footer>
 );

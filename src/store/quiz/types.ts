@@ -1,8 +1,16 @@
+
+/*
+    Actions types
+*/
 export enum QuizActionsType {
     LOAD_INITIAL_STATE = 'LOAD_INITIAL_STATE',
     NEXT_QUESTION = 'NEXT_QUESTION',
     SAVE_ANSWER = 'SAVE_ANSWER'
 }
+
+/*
+    Reducer types
+*/
 
 export interface Question {
     id: number;
@@ -18,9 +26,23 @@ export interface Answer {
     description: string;
 }
 
-export interface QuestionsState {
+export interface QuizState {
     questions: { [id: number]: Question};
-    currentQuestionId: number | null;
+    currentQuestionId: number;
+    status: BranchStatus;
+}
+
+export interface BranchStatus {
+    loaded:boolean
     loading: boolean;
     error: boolean;
+}
+
+/*
+    Payload types
+*/
+
+export interface SaverAnswerPayload {
+    questionId: number;
+    anwserId: number;
 }
