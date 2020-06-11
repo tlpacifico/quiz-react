@@ -39,7 +39,7 @@ class QuizApp extends Component<Props>{
         const { currentQuestion, questions, totalOfQuestions } = this.props;
 
         return (
-          <Container maxWidth="md" className="app-container">    
+          <Container maxWidth="md">    
             <QuizHeader totalOfQuestion={totalOfQuestions} currentQuestion={currentQuestion.id} timerQuiz={30} />
             <QuizBody
                  key={currentQuestion.id}
