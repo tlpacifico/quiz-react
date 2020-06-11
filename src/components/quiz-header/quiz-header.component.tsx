@@ -1,7 +1,32 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import moment from 'moment';
-import './quiz-header.styles.scss'
-import { Box, LinearProgress } from '@material-ui/core';
+import { Box, LinearProgress, makeStyles } from '@material-ui/core';
+
+
+const useStyles = makeStyles({
+    header: {
+        display: "flex",    
+        width: '100%',  
+        marginBottom: '25px'
+    },
+    titleQuizz: {
+        display: 'flex',
+        width: '50%',
+        alignItems: 'flex-start',
+        fontSize: '20px',
+        fontWeight: 'bold',
+        color: '#3f51b5',
+    },
+    counter: { 
+        display: 'flex',
+        width: '50%',
+        alignItems: 'flex-end',
+        flexDirection: 'column',
+        fontSize: '17px',
+        fontWeight: 'bold',
+        color: '#3f51b5',
+    }
+  })
 
 interface OwnProps {
     currentQuestion: number;
@@ -9,47 +34,42 @@ interface OwnProps {
     timerQuiz: number;
 }
 
-class QuizHeader extends React.Component<OwnProps, { timerOut: string | null }>{
-    constructor(props: OwnProps) {
-        super(props);
-        this.state = {
-            timerOut: ' '
-        }
-    }
+const QuizHeader: React.FC<OwnProps> = ({ totalOfQuestion, currentQuestion, timerQuiz }) => {
 
-    componentDidMount() {
-
-        let startTime = moment(new Date());
-        const endTime = moment().add({ minutes: this.props.timerQuiz });
-        setInterval(() => {
-            startTime = moment(new Date());
+    const [timerOut, setTimerOut] = useState<string | null>(null); 
+    const [endTime] = useState(moment().add({ minutes: timerQuiz }));
+ 
+    useEffect(() => {     
+        setInterval(() => {     
+            const startTime = moment(new Date());       
             var duration = moment.duration(endTime.diff(startTime));
             var hours = Math.round(duration.asHours()) > 1 ? Math.round(duration.asHours()) : 0;
-            var minutes = Math.round(duration.asMinutes()) - hours * 60;
-            const timetOut = minutes > 0 ? hours + "h " + minutes + "m " : null;
-            this.setState({ timerOut: timetOut });
-        }, 1000);
-    }
-    render() {
-        const completed = (this.props.currentQuestion*100)/this.props.totalOfQuestion;
-        return (
-            <Box  bgcolor="#f5f5f5" border="border-radius: 4px" marginBottom="20px" p={1}>
-                <div className="header-container">
-                    <div className="title-container">
-                        <span>QUIZ XPTO</span>
-                    </div>
-                    <div className="counter-container">
-        <span> {this.state.timerOut ? `Time limit: ${this.state.timerOut}` : 'Time is over!' }</span>
-                    </div>
+            var minutes = Math.round(duration.asMinutes()) - hours * 60;        
+            const timetOut = minutes > 0 ? `${hours}h ${minutes}m` : null;
+            setTimerOut(timetOut);
+        }, 1000)
+    }, [timerOut])
+
+    const completed = (currentQuestion * 100) / totalOfQuestion;
+    const classes = useStyles();
+    return (
+        <Box bgcolor="#f5f5f5"  border="border-radius: 4px" marginBottom="20px" p={1}>
+            <div className={classes.header}>
+                <div className={classes.titleQuizz}>
+                    <span>QUIZ XPTO</span>
                 </div>
-                <div className="navigation-container">
-                    <div className="header-navigation-item">
-                        <LinearProgress variant="determinate" value={completed} />
-                    </div>
+                <div className={classes.counter}>
+                    <span> {timerOut ? `Time limit: ${timerOut}` : 'Time is over!'}</span>
                 </div>
+            </div>
+            <Box flexDirection="row" justifyContent="space-between">
+                <Box width="100%">
+                    <LinearProgress variant="determinate" value={completed} />
+                </Box>
             </Box>
-        )
-    }
+        </Box>
+    );
 }
+
 
 export default QuizHeader;
