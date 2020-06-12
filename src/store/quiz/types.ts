@@ -29,18 +29,17 @@ export interface Answer {
 export interface QuizState {
     questions: { [id: number]: Question};
     currentQuestionId: number;
-    status: BranchStatus;
 }
 
-export interface BranchStatus {
-    loaded:boolean
-    loading: boolean;
-    error: boolean;
-}
+
 
 /*
     Payload types
 */
+
+export interface LoadQuestionPayload {
+    questionId: number;
+}
 
 export interface SaverAnswerPayload {
     questionId: number;

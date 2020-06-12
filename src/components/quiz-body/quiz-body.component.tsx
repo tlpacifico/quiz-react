@@ -2,7 +2,7 @@ import React, { FunctionComponent, ChangeEvent } from 'react';
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemText from '@material-ui/core/ListItemText';
-import { Question, SaverAnswerPayload } from '../../store/quiz/types';
+import { Question, SaverAnswerPayload, LoadQuestionPayload } from '../../store/quiz/types';
 import { RadioGroup, FormControlLabel, Radio, makeStyles, Box } from '@material-ui/core';
 
 
@@ -30,7 +30,7 @@ const ListItemLink = (props: any) => (
 type QuestionProps = {
     question: Question,
     questions: Question[]
-    loadQuestion: (questionId: number) => void;
+    loadQuestion: (payload: LoadQuestionPayload) => void;
     saveAnswer(payload: SaverAnswerPayload): void;
 }
 
@@ -52,7 +52,7 @@ const QuizBody: FunctionComponent<QuestionProps> = ({ question, questions, loadQ
                 <List component="nav">
                     {questions.map(q =>
                         <ListItemLink key={q.id}>
-                            <ListItemText key={q.id} onClick={() => loadQuestion(q.id)} primary={`Question - ${q.id}`} />
+                            <ListItemText key={q.id} onClick={() => loadQuestion({questionId: q.id})} primary={`Question - ${q.id}`} />
                         </ListItemLink>)}
                 </List>
             </Box>

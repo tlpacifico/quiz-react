@@ -1,5 +1,6 @@
 import React, { FunctionComponent } from 'react';
 import { Button, makeStyles, Box } from '@material-ui/core';
+import { LoadQuestionPayload } from '../../store/quiz/types';
 
 
 const useStyles = makeStyles({
@@ -24,7 +25,7 @@ const useStyles = makeStyles({
 
 
 type FooterProps = {
-    loadQuestion: (questionId: number) => void;
+    loadQuestion: (payload: LoadQuestionPayload) => void;
     previousIdQuestion: number | null;
     nextIdQuestion: number | null;
 }
@@ -40,14 +41,14 @@ const QuizFooter: FunctionComponent<FooterProps> = ({ loadQuestion, previousIdQu
                         variant="contained"
                         color="primary"
                         disabled={!previousIdQuestion}
-                        onClick={() => loadQuestion(previousIdQuestion ? previousIdQuestion : 0)}>Previous</Button>
+                        onClick={() => loadQuestion({questionId: previousIdQuestion ? previousIdQuestion : 0} )}>Previous</Button>
                 </Box>
                 <Box flex="40" textAlign="right">
                     <Button
                         variant="contained"
                         color="primary"
                         disabled={!nextIdQuestion}
-                        onClick={() => loadQuestion(nextIdQuestion ? nextIdQuestion : 0)}>Next</Button>
+                        onClick={() => loadQuestion({questionId: nextIdQuestion ? nextIdQuestion : 0})}>Next</Button>
                 </Box>
             </Box>
         </Box>

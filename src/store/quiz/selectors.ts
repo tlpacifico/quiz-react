@@ -13,11 +13,6 @@ const selectQuestions = createSelector(
     state => state.questions
 );
 
-export const selectStatus = createSelector(
-    [quizState],
-    state => state.status
-)
-
 export const getCurrentQuestion = createSelector(
     [selectQuestions, selectCurrentQuestionId],
     (questions, currentQuestionId) => questions[currentQuestionId]

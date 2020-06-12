@@ -6,7 +6,7 @@ import { Container } from '@material-ui/core';
 
 import { GlobalState } from '../../store/global-state';
 import { getCurrentQuestion, selectGetQuestions, selectGetTotalOfQuestions } from '../../store/quiz/selectors';
-import { Question, SaverAnswerPayload } from '../../store/quiz/types';
+import * as quizzTypes from '../../store/quiz/types';
 
 import QuizHeader from '../quiz-header/quiz-header.component';
 import QuizFooter from '../quiz-footer/quiz-footer.component';
@@ -14,15 +14,15 @@ import * as quizActions from '../../store/quiz/actions';
 import QuizBody from '../quiz-body/quiz-body.component';
 
 interface StateProps {
-    currentQuestion: Question;
-    questions: Question[]
+    currentQuestion: quizzTypes.Question;
+    questions: quizzTypes.Question[]
     totalOfQuestions: number;
 }
 
 interface DispatchProps {
     loadInitialState(): void;
-    loadQuestion(questionId: number): void;
-    saveAnswer(payload: SaverAnswerPayload): void;
+    loadQuestion(payload: quizzTypes.LoadQuestionPayload): void;
+    saveAnswer(payload: quizzTypes.SaverAnswerPayload): void;
 }
 
 type Props = StateProps & DispatchProps;
